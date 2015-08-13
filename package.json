@@ -14,13 +14,13 @@
   },
   "license": "MIT",
   "author": "Jeff Bellsey <jbellsey@gmail.com>",
-  "main": "dist/commonjs/index.js",
+  "main": "dist/commonjs/http-cached-getter.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/jbellsey/aurelia-cached-getter"
   },
   "jspm": {
-    "main": "index",
+    "main": "http-cached-getter",
     "format": "amd",
     "directories": {
       "lib": "dist/amd"

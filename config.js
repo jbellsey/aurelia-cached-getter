@@ -11,7 +11,7 @@ System.config({
   "paths": {
     "github:*": "jspm_packages/github/*",
     "npm:*": "jspm_packages/npm/*",
-    "dialog/*": "dist/commonjs/*.js"
+    "aurelia-cached-getter/*": "dist/system/*"
   }
 });
 
