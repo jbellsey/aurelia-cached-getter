@@ -4,6 +4,31 @@ var to5 = require('gulp-babel');
 var paths = require('../paths');
 var compilerOptions = require('../babel-options');
 var assign = Object.assign || require('object.assign');
+var through2 = require('through2');
+var tools = require('aurelia-tools');
+var concat = require('gulp-concat');
+var insert = require('gulp-insert');
+var jsName = paths.packageName + '.js';
+
+gulp.task('build-index', function(){
+  var importsToAdd = [];
+  var files = [
+        paths.root + 'storage.js',
+        paths.root + 'http-cached-getter.js'
+      ];
+
+  return gulp.src(files)
+      .pipe(through2.obj(function(file, enc, callback) {
+        file.contents = new Buffer(tools.extractImports(file.contents.toString("utf8"), importsToAdd));
+        this.push(file);
+        return callback();
+      }))
+      .pipe(concat(jsName))
+      .pipe(insert.transform(function(contents) {
+        return tools.createImportBlock(importsToAdd) + contents;
+      }))
+      .pipe(gulp.dest(paths.output));
+});
 
 gulp.task('build-es6', function () {
   return gulp.src(paths.source)
@@ -31,6 +56,7 @@ gulp.task('build-system', function () {
 gulp.task('build', function(callback) {
   return runSequence(
     'clean',
+    'build-index',
     ['build-commonjs', 'build-amd', 'build-system', 'build-es6'],
     callback
   );
