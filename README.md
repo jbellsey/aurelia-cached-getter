@@ -40,7 +40,7 @@ jspm install github:jbellsey/aurelia-cached-getter
 
 It is not recommended that you use this library as a drop-in replacement for
 all uses of `HttpClient.get()`. In our applications, we differentiate between
-those requests which need offline caching, and those that don't; in the latter case,
+those requests which need offline caching and those that don't; in the latter case,
 errors are handled normally with `catch()` clauses.
 
 To manage the two classes of access -- cacheable and not-cachable -- we
@@ -65,18 +65,18 @@ export class MyAPImanager {
         this.http = (new HttpClient()).configure(x => {
             x.withBaseUrl(baseURL);
         });
+    }
         
-        // usage example
-        getListOfCandidates(electionID) {
-            var url = `candidates/${electionID}`;
-            return this.httpCachedGet.get(url);
-        }
-        
-        // usage example of when you might not want to use local storage for caching.
-        // here we're retrieving the web page for a candidate (e.g., "http://berniesanders.com")
-        getCandidateWebPage(candidatePage) {
-            return this.http.get(candidatePage);
-        }
+    // usage example
+    getListOfCandidates(electionID) {
+        var url = `candidates/${electionID}`;
+        return this.httpCachedGet.get(url);
+    }
+    
+    // usage example of when you might not want to use local storage for caching.
+    // here we're retrieving the web page for a candidate (e.g., "http://berniesanders.com")
+    getCandidateWebPage(candidatePage) {
+        return this.http.get(candidatePage);
     }
 }
 ```
@@ -95,14 +95,14 @@ Well, that's not precisely true. If you do nothing to override this behavior, th
 with "cg_", which assists in eyeballing the list of keys in localStorage. So the actual key in the 
 example here would be `cg_candidates/44`.
 
-Now we're ready to discuss the options object that you can optionally pass to the constructor. 
+Now we're ready to discuss the options object that you can pass to the constructor. 
 Nothing here is required.
 
-* `prefix` You can override the prefix to be used for all localStorage keys. To remove the prefix,
+* `prefix` - You can override the prefix to be used for all localStorage keys. To remove the prefix,
     pass an empty string.
 
 * `urlTransformer` - You can change the way keys are deployed. Instead of simply using the URL
-    that you pass to `get()` as the key for local storage, you can provide a function whose 
+    as the key for local storage, you can provide a function whose 
     input is the URL and whose output is the key you prefer. For instance, you could replace `/` with `-`,
     or remove redundant keywords, or simply shorten certain text strings (`candidates` => `C`). 
     Note that this transformation applies only to the key used for localStorage; the URL itself
@@ -119,7 +119,7 @@ For example:
 // remove user ID from all localStorage keys. this is not for security, but for 
 // debugging convenience, simply because the key strings can get so long
 function removeUserId(url) {
-    return url.replace(getUserID(), '');
+    return url.replace(getUserId(), '');
 }
 
 export class MyAPImanager {
@@ -128,7 +128,7 @@ export class MyAPImanager {
 
         this.httpCachedGet = (new HttpCachedGetter({
             urlTransformer:  removeUserId,  // see function definition above
-            prefix:          "",            // suppress the default "cg_" prefix for LS keys
+            prefix:          '',            // suppress the default "cg_" prefix for LS keys
             simulateOffline: true           // debug how our cache is behaving
         })).configure(x => {
             x.withBaseUrl(baseURL);
