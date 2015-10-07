@@ -14,6 +14,8 @@ System.register(['aurelia-http-client', './storage'], function (_export) {
             Storage = _storage.Storage;
         }],
         execute: function () {
+            _export('Storage', Storage);
+
             HttpCachedGetter = (function (_HttpClient) {
                 _inherits(HttpCachedGetter, _HttpClient);
 

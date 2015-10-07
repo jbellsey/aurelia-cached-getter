@@ -27,6 +27,8 @@ export class Storage {
 }
 
 
+export {Storage};
+
 export class HttpCachedGetter extends HttpClient {
 
     /**

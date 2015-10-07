@@ -2,6 +2,8 @@
 import {HttpClient} from 'aurelia-http-client';
 import {Storage} from './storage';
 
+export {Storage};
+
 export class HttpCachedGetter extends HttpClient {
 
     /**

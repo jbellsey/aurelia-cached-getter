@@ -10,6 +10,8 @@ var _aureliaHttpClient = require('aurelia-http-client');
 
 var _storage = require('./storage');
 
+exports.Storage = _storage.Storage;
+
 var HttpCachedGetter = (function (_HttpClient) {
     _inherits(HttpCachedGetter, _HttpClient);
 
