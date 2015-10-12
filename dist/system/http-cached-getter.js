@@ -14,15 +14,19 @@ System.register(['aurelia-http-client', './storage'], function (_export) {
             Storage = _storage.Storage;
         }],
         execute: function () {
+            _export('Storage', Storage);
+
             HttpCachedGetter = (function (_HttpClient) {
                 _inherits(HttpCachedGetter, _HttpClient);
 
-                function HttpCachedGetter(_ref) {
+                function HttpCachedGetter(options) {
+                    _classCallCheck(this, HttpCachedGetter);
+
+                    var _ref = options || {};
+
                     var urlTransformer = _ref.urlTransformer;
                     var prefix = _ref.prefix;
                     var simulateOffline = _ref.simulateOffline;
-
-                    _classCallCheck(this, HttpCachedGetter);
 
                     _HttpClient.call(this);
                     this.urlTransformer = urlTransformer || function (url) {

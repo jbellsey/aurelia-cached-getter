@@ -10,15 +10,19 @@ var _aureliaHttpClient = require('aurelia-http-client');
 
 var _storage = require('./storage');
 
+exports.Storage = _storage.Storage;
+
 var HttpCachedGetter = (function (_HttpClient) {
     _inherits(HttpCachedGetter, _HttpClient);
 
-    function HttpCachedGetter(_ref) {
+    function HttpCachedGetter(options) {
+        _classCallCheck(this, HttpCachedGetter);
+
+        var _ref = options || {};
+
         var urlTransformer = _ref.urlTransformer;
         var prefix = _ref.prefix;
         var simulateOffline = _ref.simulateOffline;
-
-        _classCallCheck(this, HttpCachedGetter);
 
         _HttpClient.call(this);
         this.urlTransformer = urlTransformer || function (url) {

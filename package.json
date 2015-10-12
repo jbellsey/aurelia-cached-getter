@@ -1,6 +1,6 @@
 {
   "name": "aurelia-cached-getter",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Cache your Aurelia GET requests into localstorage for offline access",
   "keywords": [
     "aurelia",

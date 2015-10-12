@@ -2,17 +2,27 @@
 import {HttpClient} from 'aurelia-http-client';
 import {Storage} from './storage';
 
+export {Storage};
+
 export class HttpCachedGetter extends HttpClient {
 
     /**
      * Create a new Cached Getter.
      *
-     * @param {function} [urlTransformer]  - optional. function takes a URL (string), and can transform it. if omitted,
-     *                                       the URL is used as the key for the entry in localStorage.
-     * @param {string}   [prefix]          - optional. if provided, all keys in localStorage will be prefixed
-     * @param {boolean}  [simulateOffline] - if this flag is true, no actual GET operations will occur
+     * @param {object}   [options]                 - details below:
+     * @param {function} [options.urlTransformer]  - optional. function takes a URL (string), and can transform it.
+     *                                               if omitted, the URL is used as the key for the entry in
+     *                                               localStorage.
+     * @param {string}   [options.prefix]          - optional. if provided, all keys in localStorage will be prefixed
+     * @param {boolean}  [options.simulateOffline] - if this flag is true, no actual GET operations will occur
      */
-    constructor({urlTransformer, prefix, simulateOffline}) {
+    constructor(options) {
+
+        var {
+                urlTransformer,
+                prefix,
+                simulateOffline
+            } = options || {};
 
         super();
         this.urlTransformer  = urlTransformer || (url => url);
